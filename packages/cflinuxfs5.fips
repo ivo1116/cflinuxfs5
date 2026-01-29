@@ -1,0 +1,21 @@
+# FIPS-specific packages for Ubuntu Pro FIPS method
+#
+# These packages are installed from the Ubuntu Pro FIPS repository
+# and provide NIST FIPS 140-2/140-3 validated cryptographic modules.
+#
+# IMPORTANT: This file is only used with FIPS_METHOD=ubuntu-pro
+# which requires a valid Ubuntu Pro subscription token.
+#
+# The packages below replace standard crypto packages with
+# FIPS-validated versions from Canonical's FIPS repository.
+
+# Core FIPS crypto packages
+libssl3t64
+openssl
+libgcrypt20
+libgnutls30t64
+
+# Note: Additional FIPS packages may be available depending on
+# your Ubuntu Pro subscription level. Check with:
+#   pro status
+#   apt search fips

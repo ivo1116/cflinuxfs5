@@ -1,7 +1,11 @@
+# syntax=docker/dockerfile:1.4
 ARG base
 FROM $base
 ARG locales
 ARG packages
+ARG fips_packages
+ARG fips=false
+ARG fips_method=source
 ARG package_args='--allow-downgrades --allow-remove-essential --allow-change-held-packages --no-install-recommends'
 ARG user_id=2000
 ARG group_id=2000
@@ -9,6 +13,7 @@ ARG group_id=2000
 # Use new deb822 sources
 COPY packages/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
+# Install base packages first
 RUN echo "debconf debconf/frontend select noninteractive" | debconf-set-selections && \
   export DEBIAN_FRONTEND=noninteractive && \
   apt-get -y $package_args update && \
@@ -17,24 +22,41 @@ RUN echo "debconf debconf/frontend select noninteractive" | debconf-set-selectio
   apt-get clean && \
   find /usr/share/doc/*/* ! -name copyright | xargs rm -rf
 
+# FIPS configuration script
+COPY scripts/configure-fips.sh /tmp/configure-fips.sh
+
+# Configure FIPS mode based on method
+# For ubuntu-pro method, use BuildKit secrets:
+#   docker build --secret id=ubuntu_pro_token,src=token.txt ...
+# The secret is mounted at /run/secrets/ubuntu_pro_token and never stored in image layers
+RUN --mount=type=secret,id=ubuntu_pro_token,required=false \
+  chmod +x /tmp/configure-fips.sh && \
+  /tmp/configure-fips.sh "${fips}" "${fips_method}" "${fips_packages}" && \
+  rm -f /tmp/configure-fips.sh
+
 # SSH hardening (only if openssh-server is installed)
 RUN if [ -f /etc/ssh/sshd_config ]; then \
   sed -i s/#PermitRootLogin.*/PermitRootLogin\ no/ /etc/ssh/sshd_config && \
   sed -i s/#PasswordAuthentication.*/PasswordAuthentication\ no/ /etc/ssh/sshd_config; \
   fi
 
+# Locale configuration
 RUN echo 'LANG="en_US.UTF-8"' > /etc/default/locale && \
   echo "$locales" | grep -f - /usr/share/i18n/SUPPORTED | cut -d " " -f 1 | xargs locale-gen && \
   dpkg-reconfigure -fnoninteractive -pcritical locales tzdata libc6
 
+# Create vcap user
 RUN useradd -u ${user_id} -mU -s /bin/bash vcap && \
   mkdir /home/vcap/app && \
   chown vcap:vcap /home/vcap/app && \
   ln -s /home/vcap/app /app
 
+# OpenSSL configuration - allow user overrides
 RUN printf '\n%s\n' >> "/etc/ssl/openssl.cnf" \
   '# Allow user-set openssl.cnf' \
   '.include /tmp/app/openssl.cnf' \
   '.include /home/vcap/app/openssl.cnf'
+
+# Note: FIPS marker file is created by configure-fips.sh only on successful configuration
 
 USER ${user_id}:${group_id}
