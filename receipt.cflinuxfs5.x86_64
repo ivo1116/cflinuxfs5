@@ -1,4 +1,4 @@
-Rootfs SHASUM: 94c027ed2ec6f9560b33da591df266fe2e956b5620f59bec9dd52a4eb724cff7
+Rootfs SHASUM: af00a59be64e72b82c0a5337cf02d890195103b5d34b23dbe914e79fecec62eb
 
 Desired=Unknown/Install/Remove/Purge/Hold
 | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
@@ -39,7 +39,7 @@ ii  cpp-13-x86-64-linux-gnu           13.3.0-6ubuntu2~24.04.1               amd6
 ii  cpp-x86-64-linux-gnu              4:13.2.0-7ubuntu1                     amd64        GNU C preprocessor (cpp) for the amd64 architecture
 ii  cron                              3.0pl1-184ubuntu2                     amd64        process scheduling daemon
 ii  cron-daemon-common                3.0pl1-184ubuntu2                     all          process scheduling daemon's configuration files
-ii  curl                              8.5.0-2ubuntu10.6                     amd64        command line tool for transferring data with URL syntax
+ii  curl                              8.5.0-2ubuntu10.7                     amd64        command line tool for transferring data with URL syntax
 ii  dash                              0.5.12-6ubuntu5                       amd64        POSIX-compliant shell
 ii  debconf                           1.5.86ubuntu1                         all          Debian configuration management system
 ii  debconf-i18n                      1.5.86ubuntu1                         all          full internationalization support for debconf
@@ -165,9 +165,9 @@ ii  libcrypt1:amd64                   1:4.4.36-4build1                      amd6
 ii  libcryptsetup12:amd64             2:2.7.0-1ubuntu4.2                    amd64        disk encryption support - shared library
 ii  libctf-nobfd0:amd64               2.42-4ubuntu2.8                       amd64        Compact C Type Format library (runtime, no BFD dependency)
 ii  libctf0:amd64                     2.42-4ubuntu2.8                       amd64        Compact C Type Format library (runtime, BFD dependency)
-ii  libcurl3t64-gnutls:amd64          8.5.0-2ubuntu10.6                     amd64        easy-to-use client-side URL transfer library (GnuTLS flavour)
-ii  libcurl4-openssl-dev:amd64        8.5.0-2ubuntu10.6                     amd64        development files and documentation for libcurl (OpenSSL flavour)
-ii  libcurl4t64:amd64                 8.5.0-2ubuntu10.6                     amd64        easy-to-use client-side URL transfer library (OpenSSL flavour)
+ii  libcurl3t64-gnutls:amd64          8.5.0-2ubuntu10.7                     amd64        easy-to-use client-side URL transfer library (GnuTLS flavour)
+ii  libcurl4-openssl-dev:amd64        8.5.0-2ubuntu10.7                     amd64        development files and documentation for libcurl (OpenSSL flavour)
+ii  libcurl4t64:amd64                 8.5.0-2ubuntu10.7                     amd64        easy-to-use client-side URL transfer library (OpenSSL flavour)
 ii  libcwidget4:amd64                 0.5.18-6build1                        amd64        high-level terminal interface library for C++ (runtime files)
 ii  libdatrie1:amd64                  0.2.13-3build1                        amd64        Double-array trie library
 ii  libdav1d-dev:amd64                1.4.1-1build1                         amd64        fast and small AV1 video stream decoder (development files)
