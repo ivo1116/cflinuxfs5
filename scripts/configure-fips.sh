@@ -238,17 +238,23 @@ EOF
     
     # Update package lists after enabling FIPS repo
     apt-get -y $PACKAGE_ARGS update
-    
+
     # Install FIPS packages if specified
     if [[ -n "$FIPS_PACKAGES" ]]; then
-      echo "Installing FIPS-specific packages: $FIPS_PACKAGES"
-      # shellcheck disable=SC2086
-      if ! apt-get -y $PACKAGE_ARGS install $FIPS_PACKAGES; then
-        echo "ERROR: Failed to install FIPS packages"
-        exit 1
+      # Filter out comments and blank lines from packages list
+      FILTERED_PACKAGES=$(echo "$FIPS_PACKAGES" | grep -v '^#' | grep -v '^[[:space:]]*$' | tr '\n' ' ')
+      if [[ -n "$FILTERED_PACKAGES" ]]; then
+        echo "Installing FIPS-specific packages: $FILTERED_PACKAGES"
+        # shellcheck disable=SC2086
+        if ! apt-get -y $PACKAGE_ARGS install $FILTERED_PACKAGES; then
+          echo "ERROR: Failed to install FIPS packages"
+          exit 1
+        fi
+      else
+        echo "No FIPS packages to install (all lines were comments)"
       fi
     fi
-    
+
     apt-get clean
     rm -rf /var/lib/apt/lists/*
     
