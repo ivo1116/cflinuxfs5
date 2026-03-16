@@ -1,4 +1,4 @@
-Rootfs SHASUM: 88815c4527bdc3bcef5e752cfc4441c82b8c19e6ab53b8e8ad78b63e76b425ef
+Rootfs SHASUM: e1280f802015ba834a97d1b9ebf7bef11cd39253746fd031b72be75386c17d0a
 
 Desired=Unknown/Install/Remove/Purge/Hold
 | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
@@ -450,7 +450,7 @@ ii  libspeex1:amd64                   1.2.1-2ubuntu2.24.04.1                amd6
 ii  libsqlite3-0:amd64                3.45.1-1ubuntu2.5                     amd64        SQLite 3 shared library
 ii  libsqlite3-dev:amd64              3.45.1-1ubuntu2.5                     amd64        SQLite 3 development files
 ii  libss2:amd64                      1.47.0-2.4~exp1ubuntu4.1              amd64        command-line interface parsing library
-ii  libssh-4:amd64                    0.10.6-2ubuntu0.3                     amd64        tiny C SSH library (OpenSSL flavor)
+ii  libssh-4:amd64                    0.10.6-2ubuntu0.4                     amd64        tiny C SSH library (OpenSSL flavor)
 ii  libssl-dev:amd64                  3.0.13-0ubuntu3.7                     amd64        Secure Sockets Layer toolkit - development files
 ii  libssl3t64:amd64                  3.0.13-0ubuntu3.7                     amd64        Secure Sockets Layer toolkit - shared libraries
 ii  libstdc++-13-dev:amd64            13.3.0-6ubuntu2~24.04.1               amd64        GNU Standard C++ Library v3 (development files)
