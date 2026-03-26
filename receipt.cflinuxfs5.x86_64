@@ -1,4 +1,4 @@
-Rootfs SHASUM: 4a2cf7b0d4b871795b063fe31d1347ab3fcd0687863305dc728b8cb0a03ce664
+Rootfs SHASUM: 6fb97d5d73a5ea5d63f17c29240b15c9a7f030f2e6a8e598c718c76b0ac9f579
 
 Desired=Unknown/Install/Remove/Purge/Hold
 | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
@@ -16,9 +16,9 @@ ii  autotools-dev                     20220109.1                            all 
 ii  base-files                        13ubuntu10.4                          amd64        Debian base system miscellaneous files
 ii  base-passwd                       3.6.3build1                           amd64        Debian base system master password and group files
 ii  bash                              5.2.21-2ubuntu4                       amd64        GNU Bourne Again SHell
-ii  bind9-dnsutils                    1:9.18.39-0ubuntu0.24.04.2            amd64        Clients provided with BIND 9
-ii  bind9-host                        1:9.18.39-0ubuntu0.24.04.2            amd64        DNS Lookup Utility
-ii  bind9-libs:amd64                  1:9.18.39-0ubuntu0.24.04.2            amd64        Shared Libraries used by BIND 9
+ii  bind9-dnsutils                    1:9.18.39-0ubuntu0.24.04.3            amd64        Clients provided with BIND 9
+ii  bind9-host                        1:9.18.39-0ubuntu0.24.04.3            amd64        DNS Lookup Utility
+ii  bind9-libs:amd64                  1:9.18.39-0ubuntu0.24.04.3            amd64        Shared Libraries used by BIND 9
 ii  binutils                          2.42-4ubuntu2.10                      amd64        GNU assembler, linker and binary utilities
 ii  binutils-common:amd64             2.42-4ubuntu2.10                      amd64        Common files for the GNU assembler, linker and binary utilities
 ii  binutils-x86-64-linux-gnu         2.42-4ubuntu2.10                      amd64        GNU binary utilities, for x86-64-linux-gnu target
@@ -47,7 +47,7 @@ ii  debianutils                       5.17build1                            amd6
 ii  diffutils                         1:3.10-1build1                        amd64        File comparison utilities
 ii  distro-info                       1.7build1                             amd64        provides information about the distributions' releases
 ii  distro-info-data                  0.60ubuntu0.5                         all          information about the distributions' releases (data files)
-ii  dnsutils                          1:9.18.39-0ubuntu0.24.04.2            all          Transitional package for bind9-dnsutils
+ii  dnsutils                          1:9.18.39-0ubuntu0.24.04.3            all          Transitional package for bind9-dnsutils
 ii  dpkg                              1.22.6ubuntu6.5                       amd64        Debian package management system
 ii  dpkg-dev                          1.22.6ubuntu6.5                       all          Debian package development tools
 ii  e2fsprogs                         1.47.0-2.4~exp1ubuntu4.1              amd64        ext2/ext3/ext4 file system utilities
