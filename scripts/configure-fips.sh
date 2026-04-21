@@ -276,6 +276,46 @@ FIPS_CNF
     apt-get clean
     rm -rf /var/lib/apt/lists/*
     
+    # CRITICAL: Remove Ubuntu Pro subscription credentials from rootfs
+    # The FIPS packages are already installed and will remain functional.
+    # But pro attach leaves behind machine tokens, APT auth credentials,
+    # and subscription state that must NOT be distributed in the rootfs.
+    echo ""
+    echo "Cleaning up Ubuntu Pro subscription credentials..."
+    
+    # Hold FIPS packages so they can't be removed by pro detach or autoremove
+    if dpkg -l | grep -qi fips; then
+      dpkg -l | grep -i fips | awk '/^ii/ {print $2}' | xargs apt-mark hold 2>/dev/null || true
+    fi
+    # Also hold the specific crypto packages we installed
+    apt-mark hold libssl3t64 openssl libgcrypt20 libgnutls30t64 2>/dev/null || true
+    
+    # Remove machine token and all Pro subscription credentials
+    rm -rf /var/lib/ubuntu-advantage/private/
+    rm -f /var/lib/ubuntu-advantage/machine-token.json
+    rm -f /var/lib/ubuntu-advantage/status.json
+    rm -f /var/lib/ubuntu-advantage/attachment.json
+    rm -f /var/lib/ubuntu-advantage/jobs-status.json
+    rm -rf /var/lib/ubuntu-advantage/messages/
+    rm -rf /var/lib/ubuntu-advantage/notices/
+    
+    # Remove APT auth credentials for Pro repos
+    rm -f /etc/apt/auth.conf.d/90ubuntu-advantage
+    
+    # Remove Pro APT sources (packages already installed, repos no longer needed)
+    rm -f /etc/apt/sources.list.d/ubuntu-*.sources
+    rm -f /etc/apt/sources.list.d/ubuntu-*.list
+    
+    echo "Ubuntu Pro credentials removed from rootfs"
+    
+    # Verify FIPS packages are still installed after cleanup
+    echo "Verifying FIPS packages are intact..."
+    if ! dpkg -l openssl | grep -q '^ii'; then
+      echo "ERROR: openssl package was removed during cleanup"
+      exit 1
+    fi
+    echo "  - FIPS packages verified"
+    
     FIPS_CONFIGURED=true
     echo "Ubuntu Pro FIPS configuration complete"
     ;;
@@ -347,6 +387,15 @@ OPENSSL_FIPS_MODULE=/usr/lib/x86_64-linux-gnu/ossl-modules/fips.so
 
 # NOTE: Source-built OpenSSL is NOT NIST FIPS 140-2/140-3 validated
 # For compliance purposes, use ubuntu-pro method with certified packages
+EOF
+  elif [[ "$FIPS_METHOD" == "ubuntu-pro" ]]; then
+    cat >> /etc/cflinuxfs5-fips << EOF
+FIPS_VALIDATION=NIST
+OPENSSL_VERSION=$(openssl version | awk '{print $2}')
+FIPS_PACKAGES=$(dpkg -l | grep -i fips | awk '/^ii/ {print $2 "=" $3}' | tr '\n' ' ')
+
+# Ubuntu Pro FIPS packages are NIST FIPS 140-2/140-3 validated
+# Subscription credentials have been removed from this rootfs
 EOF
   fi
 fi
